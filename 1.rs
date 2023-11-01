@@ -32,10 +32,12 @@ fn read_array_libros(libros: &[Libro; 10]) -> () {
 fn edit_array_libros(libros: [Libro; 10]) -> [Libro; 10]{
     let mut nuevos_libros: [Libro; 10] = libros.clone();
 
-    nuevos_libros[0].titulo = utiles::ingreso_texto("Título".to_string());
-    nuevos_libros[0].autor = utiles::ingreso_texto("Autor".to_string());
-    print!("Ingrese el anio de publicación: ");
-    nuevos_libros[0].anio = utiles::texto_numero("año de publicacion".to_string());
+    for i in 0..nuevos_libros.len(){
+        nuevos_libros[i].titulo = utiles::ingreso_texto("Título".to_string());
+        nuevos_libros[i].autor = utiles::ingreso_texto("Autor".to_string());
+        print!("Ingrese el anio de publicación: ");
+        nuevos_libros[i].anio = utiles::texto_numero("año de publicacion".to_string());
+}
 
     return nuevos_libros
 }
