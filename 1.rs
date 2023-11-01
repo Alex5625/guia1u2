@@ -1,24 +1,59 @@
-/* *\
 use std::default::Default;
 mod utiles;
 
 #[derive(Default)]
-struct Libro{
-  titulo:String,
-  autor:String,
-  año:i32
-} //LIBRO ES UN TIPO DE DATO TMB CUANDO HACES LA ESTRUCTURA
+#[derive(Clone)]
+struct Libro {
+    titulo: String,
+    autor: String,
+    anio: i32,
+}
 
-//define tamaño del arreglo q vas a retornar
-//LAS VARIABLES SON REFERENCIAS PARA COSAS Q HEMOS CREADO
-//PUEDEN SER ACCEDIDOS POR MUCHAS VARIABLES, TENINENDO EL CONTROL DE QN FUE EL ULTIMO Q EDITO ESTA CAJITA, Y CON ELLA PODEMOS TENER ACCESO A LOS VALORES DE LA ESTRUCTURA
-fn crear_arreglo_libro() -> [Libro;2] {
-    let arreglo:[Libro;2] = [];
 
+fn create_array_libros() -> [Libro;10]{
+
+    let arreglo: [Libro; 10] = Default::default();
     return arreglo;
+
 }
 
-fn main(){
-  let arreglo = crea_arreglo_libro();
-  println!("{:?}",arreglo);
+fn read_array_libros(libros: &[Libro; 10]) -> () {
+
+    for (number, item) in libros.iter().enumerate() {
+        print!("{}: Título: {} ", number+1, item.titulo);
+        print!("Autor: {} ", item.autor);
+        print!("Anio publicacion: {}\n", item.anio);
+    }
+
 }
+
+
+
+fn edit_array_libros(libros: [Libro; 10]) -> [Libro; 10]{
+    let mut nuevos_libros: [Libro; 10] = libros.clone();
+
+    nuevos_libros[0].titulo = utiles::ingreso_texto("Título".to_string());
+    nuevos_libros[0].autor = utiles::ingreso_texto("Autor".to_string());
+    print!("Ingrese el anio de publicación: ");
+    nuevos_libros[0].anio = utiles::texto_numero("año de publicacion".to_string());
+
+    return nuevos_libros
+}
+
+
+
+
+
+fn main() {
+
+
+    let arreglo = create_array_libros();
+    read_array_libros(&arreglo);
+
+    println!("##########");
+
+    let arreglo = edit_array_libros(arreglo);
+    read_array_libros(&arreglo);
+
+}
+
